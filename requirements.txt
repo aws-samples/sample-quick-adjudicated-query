@@ -1,0 +1,9 @@
+# Runtime dependencies for the CDK app and all local scripts (setup, ingest, acceptance, etc).
+# Exact-pinned per project convention -- avoid open ranges so a fresh checkout is reproducible.
+#
+# Install with:
+#   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+aws-cdk-lib==2.261.0
+constructs==10.6.0
+boto3==1.40.37

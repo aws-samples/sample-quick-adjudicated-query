@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+cdk.out/
+# CDK's cache of live AWS lookups (e.g. AZs); regenerates automatically on next synth/deploy
+cdk.context.json
+*.log
+# Ground-truth corpus artifacts (task 4) — regenerate deterministically from seed
+corpus/
+manifest.json
+# Never commit credentials or stack outputs containing secrets
+outputs.json
+.env
