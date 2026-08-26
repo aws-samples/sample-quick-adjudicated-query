@@ -22,21 +22,21 @@ exploratory clause search) kept strictly separate from the deterministic complia
 flowchart LR
     subgraph quick["Amazon Quick"]
         chat["Chat agent<br/>asks the question"]
-        qsight["Quick Sight dashboard<br/>all rows, drill-down"]
+        qsight["Amazon Quick Sight dashboard<br/>all rows, drill-down"]
     end
 
-    subgraph aws["Sandbox account — us-east-1, all CDK-defined"]
-        cognito["Cognito<br/>token endpoint (2LO)"]
-        apigw["API Gateway HTTP API<br/>TLS + JWT authorizer"]
-        lambda["Lambda — MCP server + rule engine<br/>sweep · simulate · explore<br/>get_finding · list_rules"]
-        bedrock["Bedrock<br/>Titan Embeddings V2 · Claude"]
-        aurora[("Aurora Serverless v2<br/>Postgres + pgvector<br/>leases · clauses · rulebook<br/>sweeps · findings")]
+    subgraph aws["Sandbox account — us-east-1, all AWS CDK-defined"]
+        cognito["Amazon Cognito<br/>token endpoint (2LO)"]
+        apigw["Amazon API Gateway HTTP API<br/>TLS + JWT authorizer"]
+        lambda["AWS Lambda — MCP server + rule engine<br/>sweep · simulate · explore<br/>get_finding · list_rules"]
+        bedrock["Amazon Bedrock<br/>Amazon Titan Text Embeddings V2 · Anthropic's Claude"]
+        aurora[("Amazon Aurora Serverless v2<br/>PostgreSQL + pgvector<br/>leases · clauses · rulebook<br/>sweeps · findings")]
     end
 
     chat -- "① fetch token" --> cognito
     chat -- "② MCP / JSON-RPC over SSE" --> apigw
     apigw -- "③ JWT validated" --> lambda
-    lambda -- "RDS Data API" --> aurora
+    lambda -- "Amazon RDS Data API" --> aurora
     lambda -- "explore only" --> bedrock
     qsight -- "VPC connection<br/>direct query" --> aurora
 ```
