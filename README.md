@@ -140,8 +140,8 @@ a file or a shell variable.
 Then in Quick: **Settings → Capabilities → MCP servers**. Delete the existing entry first if one
 exists, then create a new one with those values (OAuth client-credentials / 2LO).
 
-**Verify afterwards, in this order.** Re-registration touches the tool routing every demo moment
-depends on, so do not skip to the demo:
+**Verify afterwards, in this order.** Re-registration touches the tool routing every walkthrough
+below depends on, so do not skip straight to asking Quick a question:
 
 ```bash
 .venv/bin/python show_payload.py check_connection   # transport alive, touches no data
@@ -157,9 +157,10 @@ because acceptance proves the *server* works and not that Quick *picks* the righ
 | "Find Texas clauses that read like liability waivers." | `explore_clauses` |
 | "What if the Texas late fee cap dropped to 3%?" | `simulate_rule_change` |
 
-**If re-registration goes wrong, the demo still stands.** Moments 1–4 and 6 run on the four
-originally registered tools. Drop the what-if (moment 5) and the rest is unaffected — so a demo date
-never depends on this succeeding.
+**If re-registration goes wrong, the rest of the walkthrough still works.** `check_connection`,
+`sweep_compliance`, `explore_clauses`, `get_finding`, and `list_rules` all run on the four
+originally registered tools. Only `simulate_rule_change` (the what-if) depends on a successful
+re-registration to be available — everything else is unaffected.
 
 **Do not test in the first seconds after a `cdk deploy`.** After `UpdateFunctionCode` a warm
 container briefly serves the *old* code, so a correct fix can appear to fail twice and then pass
@@ -226,10 +227,10 @@ is a human act requiring a named reviewer and reason, and is deliberately not ex
 ## Cost and teardown
 
 Aurora min capacity is 0.5 ACU (~$0.06/hr) so it never auto-pauses — a scale-to-zero cluster makes
-the first question of a session fail while it resumes. No NAT gateway. Between demo windows, set
-`serverless_v2_min_capacity=0` and redeploy, or `npx aws-cdk@2.261.0 destroy`.
+the first question of a session fail while it resumes. No NAT gateway. Between sessions with the
+stack, set `serverless_v2_min_capacity=0` and redeploy, or `npx aws-cdk@2.261.0 destroy`.
 
-The corpus is deterministic, so a rebuilt stack reproduces identical demo numbers.
+The corpus is deterministic, so a rebuilt stack reproduces identical results.
 
 ## Data
 
